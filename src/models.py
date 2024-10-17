@@ -49,7 +49,11 @@ class Favorites(Base):
     id= Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('usuario.id'))
     planet_id = Column(ForeignKey('planets.id'), nullable=True)
-    character_id = Column(ForeignKey('characters.id'))
+    character_id = Column(ForeignKey('characters.id'),  nullable=True)
+
+    planets = relationship(Planets)
+    characters = relationship(Characters)
+    users = relationship(Usuario)
 
 
 ## Draw from SQLAlchemy base
