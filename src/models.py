@@ -43,17 +43,24 @@ class Planets(Base):
     climate = Column(String(50))
 
 
-class Favorites(Base):
-    __tablename__='favorites'
+class Favorite_Characters(Base):
+    __tablename__='favorite_characters'
 
     id= Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('usuario.id'))
-    planet_id = Column(ForeignKey('planets.id'), nullable=True)
     character_id = Column(ForeignKey('characters.id'),  nullable=True)
-
-    planets = relationship(Planets)
     characters = relationship(Characters)
     users = relationship(Usuario)
+
+class Favorite_Planets(Base):
+    __tablename__ = 'favorite_planets'
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('usuario.id'))
+    planet_id = Column(Integer,ForeignKey('planets.id'), nullable=True)
+    planets = relationship(Planets)
+    users = relationship(Usuario)
+
 
 
 ## Draw from SQLAlchemy base
