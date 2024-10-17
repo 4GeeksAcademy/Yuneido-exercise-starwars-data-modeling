@@ -21,9 +21,6 @@ class Usuario(Base):
     join_date = Column(DateTime, server_default=func.now())
 
 
-class favList(enum.Enum):
-    CHARACTERS = 'Character'
-    PLANETS = 'Planet'
 
 class Characters(Base):
     __tablename__ = 'characters'
@@ -51,12 +48,8 @@ class Favorites(Base):
 
     id= Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('usuario.id'))
-    fav_type = Column('Tipo', Enum(favList))
-    fav_id = Column(Integer, nullable=False)
-
-    __table_args__ = (
-        UniqueConstraint('user_id', 'fav_id', 'Tipo', name='uq_user_type_id'),
-    )
+    planet_id = Column(ForeignKey('planets.id'), nullable=True)
+    character_id = Column(ForeignKey('characters.id'))
 
 
 ## Draw from SQLAlchemy base
